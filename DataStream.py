@@ -34,4 +34,21 @@ class DataStream:
     def end(self):
         self.process.join()
 
-    
+    #-----------------
+    # EXAMPLE FUNCTION
+    def livedata(self, enabled, buffer):
+        while True:
+            if enabled:
+                t = time.time()
+                # Try to add data to the queue without blocking
+                try:
+                    buffer.put_nowait(t)
+                except queue.Full:
+                    try:
+                        # Get and discard the oldest item from the queue
+                        buffer.get_nowait()
+                        # Add the new data
+                        buffer.put_nowait(t)
+                    except queue.Empty:
+                        pass
+                    
