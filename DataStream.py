@@ -21,7 +21,11 @@ class DataStream:
     def setFunction(self, func):
         self.func = func
 
+    def setBuffersize(self, buffer_size):
+        self.buffer = mp.Queue(maxsize=buffer_size)
+
     def begin(self):
+        self.enabled = 1
         self.process = mp.Process(target=self.func, args=(self.enabled, self.buffer,))
         self.process.start()
 
