@@ -55,4 +55,18 @@ class DataStream:
                         buffer.put_nowait(t)
                     except queue.Empty:
                         pass
-                    
+                time.sleep(0.2)
+
+#----------------
+# EXAMPLE : USAGE
+if __name__ == '__main__': 
+    ds = DataStream()
+    ds.setFunction(ds.livedata)
+    # ds.setBuffersize(1)
+    ds.begin()
+
+    while True:
+        t = ds.buffer.get()
+        print(t)
+        print(ds.buffer.qsize())
+        time.sleep(1)
