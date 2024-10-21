@@ -20,4 +20,14 @@ with iio.imread(
     for i, im in enumerate(reader):
         print(f"Frame {i}: {im.shape}")
   
+# create an image object 
+# images = iio.imopen(URL, 'r') 
+# print(images.shape) 
+  
+# # read frames one-by-one instead 
+# for i in range(16): 
+#     img = iio.immeta(URL)
+#     # Each frame is a numpy matrix 
+#     print(img.shape) 
+
 # FAILS EVERY TIME
