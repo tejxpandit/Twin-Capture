@@ -8,17 +8,22 @@ import imageio.v3 as iio
 import matplotlib.pyplot as plt
 
 URL = "http://192.168.4.27:8080/shot.jpg"
+Camera = "<video0>"
 
-# with iio.imopen(URL, "r") as file:
-#     frame = file.read()
+plt.figure()
+plt.show(block=False)
 
-# Open the video stream
-reader = iio.imopen(URL, "r")
-
-# Read a single frame
-frame = reader.read()
-
-# Display the frame
-plt.imshow(frame)
-plt.axis('off')  # Hide axis ticks
-plt.show()
+try:
+    while True:
+        # Open the video stream
+        reader = iio.imopen(URL, "r")
+        # Read a single frame
+        frame = reader.read()
+        # Update the plot
+        plt.imshow(frame)
+        # Wait for some time
+        plt.pause(0.1)
+        
+except KeyboardInterrupt:
+    pass
+    
