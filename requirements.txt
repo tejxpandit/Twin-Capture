@@ -1,0 +1,9 @@
+# Internal Dependencies
+time
+queue
+multiprocessing
+
+# External Dependencies
+dearpygui
+pygrabber
+cv2
