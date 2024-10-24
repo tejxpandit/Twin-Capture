@@ -24,3 +24,20 @@ def process_image(arr, shape, dtype, filename):
 
   # Save the processed image
   img_gray.save(filename)
+
+
+if __name__ == '__main__':
+  # Load the image
+  img = Image.open("your_image.jpg")  # Replace with your image file
+  img_np = np.array(img)
+
+  # Get image shape and data type
+  shape = img_np.shape
+  dtype = img_np.dtype
+
+  # Create a shared memory array
+  arr = Array('b', img_np.size)  # 'b' for unsigned byte
+
+  # Copy image data to the shared array
+  arr[:] = img_np.flatten()
+
