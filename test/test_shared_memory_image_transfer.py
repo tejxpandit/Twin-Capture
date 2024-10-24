@@ -41,3 +41,14 @@ if __name__ == '__main__':
   # Copy image data to the shared array
   arr[:] = img_np.flatten()
 
+  # Create shared variables for shape
+  height = Value('i', shape[0])
+  width = Value('i', shape[1])
+  channels = Value('i', shape[2])
+
+  # Create and start the process
+  p = Process(target=process_image, args=(arr, (height.value, width.value, channels.value), dtype, "processed_image.jpg"))
+  p.start()
+  p.join()
+
+  print("Image processed and saved as processed_image.jpg")
