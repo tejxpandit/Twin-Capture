@@ -4,20 +4,22 @@
 # Date      : Oct 2024
 
 import dearpygui.dearpygui as dpg
+from VideoSource import VideoSource
 
 class TwinCaptureApp:
     def __init__(self):
         self.mode = "mode_capture"
+        self.video_sources = {}
+        self.source_count = 0
 
     def start(self):
         # DPG Context
         dpg.create_context()
         
         # DPG Viewport
-        dpg.create_viewport(title="Twin Capture", width=600, height=200)
+        dpg.create_viewport(title="Twin Capture", width=800, height=400)
         
-        # DPG Window
-        dpg.add_window(label="", tag="tag")
+        # Menu Toolbar
         dpg.add_viewport_menu_bar(tag="menubar_viewport")
         dpg.add_menu(label="Mode", parent="menubar_viewport", tag="menubar_viewport_mode")
         dpg.add_menu_item(label="Capture", parent="menubar_viewport_mode", tag="mode_capture", callback=self.setMode)
