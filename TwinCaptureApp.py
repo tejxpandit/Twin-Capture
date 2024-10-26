@@ -46,3 +46,10 @@ class TwinCaptureApp:
         for v_id, v in self.video_sources.items():
             print(v.type)
             print(v.name)
+
+#----------------
+# EXAMPLE : TEST
+if __name__ == '__main__': 
+    # Start Twin Capture App
+    twincapture = TwinCaptureApp()
+    twincapture.start()
