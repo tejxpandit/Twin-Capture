@@ -37,4 +37,12 @@ class TwinCaptureApp:
         self.mode = mode
 
     def addVideoSource(self):
-        pass
+        self.source_count += 1
+        vs = VideoSource(self.source_count, self.video_sources)
+        vs.app()
+        self.video_sources[self.source_count] = vs
+
+        # LOG ACTIVE VIDEO SOURCES
+        for v_id, v in self.video_sources.items():
+            print(v.type)
+            print(v.name)
