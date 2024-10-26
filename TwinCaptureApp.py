@@ -27,6 +27,12 @@ class TwinCaptureApp:
         dpg.add_menu(label="Add", parent="menubar_viewport", tag="menubar_viewport_add")
         dpg.add_menu_item(label="Video Source", parent="menubar_viewport_add", tag="menubar_add_videosrc", callback=self.addVideoSource)
         
+        # Add *Record All* Button
+        # dpg.add_menu_item(label="RECORD ALL", parent="menubar_viewport", callback=self.addVideoSource)
+
+        # Control Window
+        # dpg.add_window(label="Source Controls", tag="tag")
+        
         # DPG Render Context
         dpg.setup_dearpygui()
         dpg.show_viewport()
