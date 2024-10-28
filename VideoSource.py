@@ -40,3 +40,8 @@ class VideoSource:
         self.mobile_control_group = dpg.add_group(parent=self.settings_tab, show=False)
         self.url_input = dpg.add_input_text(label="IP/URL", parent=self.mobile_control_group)
         self.port_input = dpg.add_input_text(label="PORT", parent=self.mobile_control_group)
+
+        # View Tab : Video View
+        self.view_tab = dpg.add_tab(label="View", parent=self.tabs)
+        dpg.add_image(texture_tag=dpg.mvFontAtlas, parent=self.view_tab, width=self.video_width, height=self.video_height)
+        
