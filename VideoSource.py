@@ -27,3 +27,7 @@ class VideoSource:
         self.window = dpg.add_window(label=self.name, width=200, height=200, on_close=self.deleteVideoSource)
         self.tabs = dpg.add_tab_bar(parent=self.window)
 
+        # Settings Tab : Source Selection Controls
+        self.settings_tab = dpg.add_tab(label="Settings", parent=self.tabs)
+        dpg.add_text("Select Video Source Type", parent=self.settings_tab)
+        self.source_types_dropdown = dpg.add_combo(self.source_types, parent=self.settings_tab, callback=self.selectSrcType)
