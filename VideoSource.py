@@ -31,3 +31,12 @@ class VideoSource:
         self.settings_tab = dpg.add_tab(label="Settings", parent=self.tabs)
         dpg.add_text("Select Video Source Type", parent=self.settings_tab)
         self.source_types_dropdown = dpg.add_combo(self.source_types, parent=self.settings_tab, callback=self.selectSrcType)
+        
+        # Source Settings : Camera
+        self.camera_control_group = dpg.add_group(parent=self.settings_tab, show=False)
+        dpg.add_text("Select Camera", parent=self.camera_control_group)
+        self.sources_dropdown = dpg.add_combo(self.sources, parent=self.camera_control_group, callback=self.selectSrc)
+        # Source Settings : IP/Mobile
+        self.mobile_control_group = dpg.add_group(parent=self.settings_tab, show=False)
+        self.url_input = dpg.add_input_text(label="IP/URL", parent=self.mobile_control_group)
+        self.port_input = dpg.add_input_text(label="PORT", parent=self.mobile_control_group)
