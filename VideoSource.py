@@ -22,3 +22,8 @@ class VideoSource:
         self.ip_address = None
         self.port_address = None
         self.cam_src = None
+    
+    def app(self):
+        self.window = dpg.add_window(label=self.name, width=200, height=200, on_close=self.deleteVideoSource)
+        self.tabs = dpg.add_tab_bar(parent=self.window)
+
