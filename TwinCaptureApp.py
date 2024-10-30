@@ -5,12 +5,15 @@
 
 import dearpygui.dearpygui as dpg
 from VideoSource import VideoSource
+import threading
+from threading import Event
 
 class TwinCaptureApp:
     def __init__(self):
         self.mode = "mode_capture"
         self.video_sources = {}
         self.source_count = 0
+        self.update_thread = None
 
     def start(self):
         # DPG Context
@@ -32,6 +35,11 @@ class TwinCaptureApp:
 
         # Control Window
         # dpg.add_window(label="Source Controls", tag="tag")
+
+        # Start Update Thread
+        self.updatethread = threading.Thread(target=self.update)
+        self.updatethread.start()
+        # Use events for control
         
         # DPG Render Context
         dpg.setup_dearpygui()
@@ -39,6 +47,7 @@ class TwinCaptureApp:
         dpg.start_dearpygui()
         dpg.destroy_context()
 
+        
     def setMode(self, mode):
         self.mode = mode
 
@@ -52,6 +61,13 @@ class TwinCaptureApp:
         for v_id, v in self.video_sources.items():
             print(v.type)
             print(v.name)
+
+    def update(self):
+        import time
+        while True:
+            for v_id, vs in self.video_sources.items():
+                vs.updateVideoFrame()
+            # time.sleep(0.5)
 
 #----------------
 # EXAMPLE : TEST
