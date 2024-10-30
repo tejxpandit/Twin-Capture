@@ -13,3 +13,15 @@ class VideoCapture:
         self.capture_device_type = "Camera" #"IP/Mobile"
         self.camera_url = None
         self.camera_id = 0
+
+    def setCameraURL(self, url):
+        self.camera_url = url
+
+    def setCameraIP(self, ip, port, ext):
+        self.camera_url = str(ip) + ":" + str(port) + "/" + str(ext)
+        if not self.camera_url.startswith("http"):
+            self.camera_url = "http://" + self.camera_url
+
+    def setCameraID(self, camera_id):
+        self.camera_id = camera_id
+
