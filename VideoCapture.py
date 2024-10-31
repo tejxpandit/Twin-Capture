@@ -28,3 +28,15 @@ class VideoCapture:
     def setCaptureDevice(self, capture_device_type):
         self.capture_device_type = capture_device_type
 
+    def initCaptureDevice(self):
+        # First check and stop and existing camera connection
+        self.stop()
+        try:
+            if self.capture_device_type == "Camera":
+                self.cam = cv2.VideoCapture(self.camera_id)
+            elif self.capture_device_type == "IP/Mobile":
+                self.cam = cv2.VideoCapture(self.camera_url)
+            self.capture_device_flag = True
+        except:
+            print("Camera Not Accessible!")
+            self.capture_device_flag = False
