@@ -40,3 +40,12 @@ class VideoCapture:
         except:
             print("Camera Not Accessible!")
             self.capture_device_flag = False
+
+    def start(self):
+        if not self.capture_device_flag:
+            self.initCaptureDevice()
+        if self.capture_device_flag:
+            return True
+        else:
+            return False
+    
