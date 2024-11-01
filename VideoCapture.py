@@ -49,3 +49,7 @@ class VideoCapture:
         else:
             return False
     
+    def stop(self):
+        if self.capture_device_flag:
+            self.cam.release()
+        
