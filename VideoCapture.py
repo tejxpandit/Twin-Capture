@@ -71,3 +71,18 @@ class VideoCapture:
             index += 1
         return cameras
 
+
+#----------------
+# EXAMPLE : Test
+if __name__ == '__main__': 
+    VC = VideoCapture()
+    VC.setCaptureDevice("Camera")
+    # VC.setCaptureDevice("IP/Mobile")
+    VC.setCameraIP("192.168.4.27", "8080", "video")
+    VC.setCameraID(0)
+    VC.start()
+
+    frame = VC.getVideoFrame()
+    import matplotlib.pyplot as plt
+    plt.imshow(frame)
+    plt.show()
