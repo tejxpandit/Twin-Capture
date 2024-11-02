@@ -57,3 +57,17 @@ class VideoCapture:
         check, frame = self.cam.read()
         return frame
 
+    # Testing Camera Function
+    def testCameras(self):
+        index = 0
+        cameras = []
+        while True:
+            cap = cv2.VideoCapture(index)
+            if not cap.read()[0]:
+                break
+            else:
+                cameras.append(index)
+            cap.release()
+            index += 1
+        return cameras
+
