@@ -53,3 +53,7 @@ class VideoCapture:
         if self.capture_device_flag:
             self.cam.release()
         
+    def getVideoFrame(self):
+        check, frame = self.cam.read()
+        return frame
+
