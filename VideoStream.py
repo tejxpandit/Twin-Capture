@@ -16,3 +16,8 @@ class VideoStream(DataStream):
         super().__init__()
         self.func = self.videoStream
         self.capture_device_type = "Camera" #"IP/Mobile"
+        self.camera_url = ""
+        self.camera_id = 0
+        self.setBuffersize(2)
+        self.setTimeInterval(0.01)
+
