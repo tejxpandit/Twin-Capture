@@ -21,3 +21,10 @@ class VideoStream(DataStream):
         self.setBuffersize(2)
         self.setTimeInterval(0.01)
 
+    def listCameras(self):
+        devices = FilterGraph().get_input_devices()
+        available_cameras = {}
+        for device_index, device_name in enumerate(devices):
+            available_cameras[device_index] = device_name
+        return available_cameras
+
