@@ -28,3 +28,8 @@ class VideoStream(DataStream):
             available_cameras[device_index] = device_name
         return available_cameras
 
+    def begin(self):
+        self.enabled.set()
+        self.process = mp.Process(target=self.func, args=(self.enabled, self.capture_device_type, self.camera_id, self.camera_url, self.buffer, self.initfunc, self.datafunc, self.time_interval, ))
+        self.process.start()
+
