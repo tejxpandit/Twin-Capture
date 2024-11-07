@@ -33,3 +33,8 @@ class VideoStream(DataStream):
         self.process = mp.Process(target=self.func, args=(self.enabled, self.capture_device_type, self.camera_id, self.camera_url, self.buffer, self.initfunc, self.datafunc, self.time_interval, ))
         self.process.start()
 
+    def setCameraIP(self, ip, port, ext):
+        self.camera_url = str(ip) + ":" + str(port) + "/" + str(ext)
+        if not self.camera_url.startswith("http"):
+            self.camera_url = "http://" + self.camera_url
+
