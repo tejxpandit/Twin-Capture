@@ -38,3 +38,6 @@ class VideoStream(DataStream):
         if not self.camera_url.startswith("http"):
             self.camera_url = "http://" + self.camera_url
 
+    def setCameraID(self, camera_id):
+        self.camera_id = camera_id
+
