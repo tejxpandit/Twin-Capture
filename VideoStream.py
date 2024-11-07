@@ -41,3 +41,6 @@ class VideoStream(DataStream):
     def setCameraID(self, camera_id):
         self.camera_id = camera_id
 
+    def setCaptureDevice(self, capture_device_type):
+        self.capture_device_type = capture_device_type
+
