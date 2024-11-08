@@ -44,3 +44,22 @@ class VideoStream(DataStream):
     def setCaptureDevice(self, capture_device_type):
         self.capture_device_type = capture_device_type
 
+    def videoStream(self, enabled, camera_type, cam_id, cam_url, buffer, initfunc, datafunc, time_interval):
+        VC = VideoCapture()
+        VC.setCaptureDevice(camera_type)
+        VC.setCameraID(cam_id)
+        VC.setCameraURL(cam_url)
+        CameraAccess = VC.start()
+        while CameraAccess:
+            if enabled.is_set():
+                data = VC.getVideoFrame()
+                try:
+                    buffer.put_nowait(data)
+                except queue.Full:
+                    try:
+                        buffer.get_nowait()
+                        buffer.put_nowait(data)
+                    except queue.Empty:
+                        pass
+                time.sleep(time_interval)
+
