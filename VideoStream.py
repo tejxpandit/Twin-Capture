@@ -67,3 +67,15 @@ class VideoStream(DataStream):
                         pass
                 time.sleep(time_interval)
 
+#----------------
+# EXAMPLE : Test
+if __name__ == '__main__': 
+    VS = VideoStream()
+    print(VS.listCameras())
+
+    VS.setCaptureDevice("Camera")
+    # VC.setCaptureDevice("IP/Mobile")
+    VS.setCameraID(0)
+    VS.setCameraIP("192.168.4.27", "8080", "video")
+    VS.begin()
+    time.sleep(15)
