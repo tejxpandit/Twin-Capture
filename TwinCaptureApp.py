@@ -12,7 +12,11 @@ class TwinCaptureApp:
     def __init__(self):
         self.mode = "mode_capture"
         self.video_sources = {}
+        self.video_source_queue = {}
         self.source_count = 0
+        self.source_enqueued = False
+        self.source_dequeued = False
+        self.remove_src_id = 0
         self.update_thread = None
 
     def start(self):
@@ -31,7 +35,7 @@ class TwinCaptureApp:
         dpg.add_menu_item(label="Video Source", parent="menubar_viewport_add", tag="menubar_add_videosrc", callback=self.addVideoSource)
         
         # Add *Record All* Button
-        # dpg.add_menu_item(label="RECORD ALL", parent="menubar_viewport", callback=self.addVideoSource)
+        # dpg.add_menu_item(label="RECORD ALL", parent="menubar_viewport", callback=self.recordAll)
 
         # Control Window
         # dpg.add_window(label="Source Controls", tag="tag")
@@ -52,22 +56,36 @@ class TwinCaptureApp:
         self.mode = mode
 
     def addVideoSource(self):
+        self.source_enqueued = True
+
+    def enqueueVideoSource(self):
         self.source_count += 1
-        vs = VideoSource(self.source_count, self.video_sources)
+        vs = VideoSource(self.source_count, self)
         vs.app()
         self.video_sources[self.source_count] = vs
 
+    def removeVideoSource(self, src_id):
+        self.remove_src_id = src_id
+        self.source_dequeued = True
+        
+    def dequeueVideoSource(self, src_id):
+        del self.video_sources[src_id]
+
         # LOG ACTIVE VIDEO SOURCES
-        for v_id, v in self.video_sources.items():
-            print(v.type)
-            print(v.name)
+        # for v_id, v in self.video_sources.items():
+        #     print(v.type)
+        #     print(v.name)
 
     def update(self):
-        import time
         while True:
             for v_id, vs in self.video_sources.items():
                 vs.updateVideoFrame()
-            # time.sleep(0.5)
+            if self.source_enqueued:
+                self.enqueueVideoSource()
+                self.source_enqueued = False
+            if self.source_dequeued:
+                self.dequeueVideoSource(self.remove_src_id)
+                self.source_dequeued = False
 
 #----------------
 # EXAMPLE : TEST

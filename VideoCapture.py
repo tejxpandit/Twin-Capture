@@ -34,8 +34,10 @@ class VideoCapture:
         try:
             if self.capture_device_type == "Camera":
                 self.cam = cv2.VideoCapture(self.camera_id)
+                self.cam.set(cv2.CAP_PROP_BUFFERSIZE, 1)
             elif self.capture_device_type == "IP/Mobile":
                 self.cam = cv2.VideoCapture(self.camera_url)
+                self.cam.set(cv2.CAP_PROP_BUFFERSIZE, 1)
             self.capture_device_flag = True
         except:
             print("Camera Not Accessible!")
