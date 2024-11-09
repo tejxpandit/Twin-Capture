@@ -11,6 +11,10 @@ from pygrabber.dshow_graph import FilterGraph
 from VideoCapture import VideoCapture
 from util.DataStream import DataStream
 
+# TODO : Create Events for control
+# TODO : Create Pipes for data transfer
+# TODO : Explore Shared Memory for Faster Data Transfer of Images
+
 class VideoStream(DataStream):
     def __init__(self):
         super().__init__()
