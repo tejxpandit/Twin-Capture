@@ -79,3 +79,10 @@ if __name__ == '__main__':
     VS.setCameraIP("192.168.4.27", "8080", "video")
     VS.begin()
     time.sleep(15)
+    
+    frame = VS.getData()
+    import matplotlib.pyplot as plt
+    plt.imshow(frame)
+    plt.show()
+
+    VS.end()
