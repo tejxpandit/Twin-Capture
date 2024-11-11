@@ -2,9 +2,7 @@
 # Author    : Tej Pandit
 # Date      : Oct 2024
 
-import time
 import cv2
-from pygrabber.dshow_graph import FilterGraph
 
 class VideoCapture:
     def __init__(self):
