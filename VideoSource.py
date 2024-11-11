@@ -3,10 +3,11 @@
 # Author    : Tej Pandit
 # Date      : Oct 2024
 
+import re
+import subprocess
 from multiprocessing import Process, Queue
 
 import dearpygui.dearpygui as dpg
-from pygrabber.dshow_graph import FilterGraph
 
 from VideoStream import VideoStream
 from util.ImageView import ImageView
@@ -67,19 +68,6 @@ class VideoSource:
         self.ip_address = dpg.get_value(self.ip_input)
         self.port_address = dpg.get_value(self.port_input)
         self.ext_address = dpg.get_value(self.ext_input)
-
-    # def initCameraList(self):
-    #     vid_sources = self.listCameras()
-    #     # print(vid_sources)
-    #     for id, name in vid_sources.items():
-    #         self.sources.append(name)
-
-    # def listCameras(self):
-    #     devices = FilterGraph().get_input_devices()
-    #     available_cameras = {}
-    #     for device_index, device_name in enumerate(devices):
-    #         available_cameras[device_index] = device_name
-    #     return available_cameras
 
     def initCameraList(self):
         q = Queue()
