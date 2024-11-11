@@ -97,6 +97,7 @@ class VideoSource:
 
     def selectSrc(self, selector, src):
         self.cam_src = self.sources.index(src)
+        # print(self.cam_src)
 
     def toggleStreamingState(self):
         self.streaming_state = not self.streaming_state
@@ -142,7 +143,7 @@ class VideoSource:
         self.video_stream.setCameraID(self.cam_src)
         self.getURL()
         self.video_stream.setCameraIP(self.ip_address, self.port_address, self.ext_address)
-        print(self.type, self.cam_src, self.ip_address, self.port_address, self.ext_address)
+        # print(self.type, self.cam_src, self.ip_address, self.port_address, self.ext_address)
         self.video_stream.begin()
 
     def disableVideoStream(self):
@@ -167,13 +168,44 @@ class VideoSource:
             self.stopRecording()
         if self.streaming_state:
             self.disableVideoStream()
-        self.source_manager.removeVideoSource(self.id)
+        if self.source_manager is not None:
+            self.source_manager.removeVideoSource(self.id)
 
     def updateVideoFrame(self):
         frame = self.video_stream.getData()
         if frame is not None:
             self.image_view.updateImage(image=frame, tag=self.video_view, img_type="opencv")
         # print(frame)
+
+    # CAMERA LIST : OPTION - A [DIRECT FILTERGRAPH]
+    # def initCameraList(self):
+    #     vid_sources = self.listCameras()
+    #     # print(vid_sources)
+    #     for id, name in vid_sources.items():
+    #         self.sources.append(name)
+    # def listCameras(self):
+    #     devices = FilterGraph().get_input_devices()
+    #     available_cameras = {}
+    #     for device_index, device_name in enumerate(devices):
+    #         available_cameras[device_index] = device_name
+    #     return available_cameras
+
+    # CAMERA LIST : OPTION - B [NEW FILTERGRAPH PROCESS]
+    # def initCameraList(self):
+    #     q = Queue()
+    #     LC = Process(target=self.listCamerasProcess, args=(q,))
+    #     LC.start()
+    #     LC.join()
+    #     vid_sources = q.get()
+    #     # print(vid_sources)
+    #     for id, name in vid_sources.items():
+    #         self.sources.append(name)
+    # def listCamerasProcess(self, camlist):
+    #     devices = FilterGraph().get_input_devices()
+    #     available_cameras = {}
+    #     for device_index, device_name in enumerate(devices):
+    #         available_cameras[device_index] = device_name
+    #     camlist.put(available_cameras)
 
 
 #----------------
