@@ -69,6 +69,23 @@ class VideoSource:
         self.port_address = dpg.get_value(self.port_input)
         self.ext_address = dpg.get_value(self.ext_input)
 
+    def getCameraDevices(self, device_class):
+        try:
+            # Try to run the pnputil command as a subprocess
+            result = subprocess.run(['pnputil', '/enum-devices', '/class', device_class], 
+                                capture_output=True, text=True, check=True)
+            output = result.stdout
+            
+            # Use a regular expression to find the device descriptions
+            descriptions = re.findall(r"Device Description:\s*(.*)", output)
+            if len(descriptions) > 0:
+                return descriptions
+            else:
+                return []
+        except subprocess.CalledProcessError as e:
+            print(f"Error executing pnputil: {e}")
+            return []
+        
     def initCameraList(self):
         q = Queue()
         LC = Process(target=self.listCamerasProcess, args=(q,))
