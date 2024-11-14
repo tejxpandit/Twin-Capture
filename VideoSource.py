@@ -87,21 +87,10 @@ class VideoSource:
             return []
         
     def initCameraList(self):
-        q = Queue()
-        LC = Process(target=self.listCamerasProcess, args=(q,))
-        LC.start()
-        LC.join()
-        vid_sources = q.get()
-        # print(vid_sources)
-        for id, name in vid_sources.items():
-            self.sources.append(name)
-
-    def listCamerasProcess(self, camlist):
-        devices = FilterGraph().get_input_devices()
-        available_cameras = {}
-        for device_index, device_name in enumerate(devices):
-            available_cameras[device_index] = device_name
-        camlist.put(available_cameras)
+        image_devices = self.getCameraDevices("Image")
+        camera_devices = self.getCameraDevices("Camera")
+        camera_devices.extend(image_devices)
+        self.sources = camera_devices
     
     def selectSrcType(self, selector, src_type):
         self.type = src_type
