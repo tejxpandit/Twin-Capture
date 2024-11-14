@@ -1,9 +1,20 @@
 # Internal Dependencies
+re
 time
 queue
+threading
+subprocess
 multiprocessing
 
 # External Dependencies
 dearpygui
-pygrabber
+numpy
 cv2
+
+# Optional Dependencies
+mediapipe
+
+# Removed Dependencies
+# pygrabber
+# FilterGraph
+# imageIO
