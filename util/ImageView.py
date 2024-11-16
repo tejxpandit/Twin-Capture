@@ -43,7 +43,7 @@ class ImageView:
     # Initialize Texture Registry
     def initTextureRegistry(self):
         if self.tex_reg_tag is None:
-            self.tex_reg_tag = dpg.add_texture_registry(show=True)
+            self.tex_reg_tag = dpg.add_texture_registry(show=False)
 
     # Optional : Change Custom/Existing Texture Registry
     def changeTextureRegistry(self, texture_registry_tag):
@@ -173,19 +173,19 @@ class ImageView:
             img.img_type = img_type
         # Convert and Import Image Data
         w, h, c, img.data = self.converter.imageConvert(image, img.img_type)
-        print(img.width, w, img.height, h, img.channels, c )
-        print(img.format)
+        # print(img.width, w, img.height, h, img.channels, c )
+        # print(img.format)
         # Check if Image Dims have changed
         if (img.width == w) and (img.height == h) and (img.channels == c):
             # Update Image Data
             dpg.set_value(img.tex, img.data)
-            print("same")
+            # print("same")
         else:
             # Updata Properties and Data
             img.width, img.height, img.channels = w, h, c
             # Replace Image
             self.replaceImage(img)
-            print("diff")
+            # print("diff")
         
         
     # Replace Image with Different Image
