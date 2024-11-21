@@ -39,3 +39,13 @@ options = vision.PoseLandmarkerOptions(
     output_segmentation_masks=True)
 detector = vision.PoseLandmarker.create_from_options(options)
 
+# Load the input image
+image = mp.Image.create_from_file("pose_test1.jpg")
+
+# Detect pose landmarks from the input image
+detection_result = detector.detect(image)
+
+# Annotate the detection result
+annotated_image = draw_landmarks_on_image(image.numpy_view(), detection_result)
+plt.imshow(annotated_image)
+plt.show()
