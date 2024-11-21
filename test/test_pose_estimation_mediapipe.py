@@ -32,3 +32,10 @@ def draw_landmarks_on_image(rgb_image, detection_result):
       solutions.drawing_styles.get_default_pose_landmarks_style())
   return annotated_image
 
+# Create an PoseLandmarker object
+base_options = python.BaseOptions(model_asset_path='data/models/pose_landmark/pose_landmarker_lite.task')
+options = vision.PoseLandmarkerOptions(
+    base_options=base_options,
+    output_segmentation_masks=True)
+detector = vision.PoseLandmarker.create_from_options(options)
+
