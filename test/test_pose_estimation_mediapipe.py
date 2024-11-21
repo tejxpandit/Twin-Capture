@@ -11,3 +11,12 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 
+# Draw Landmarks Overlay
+def draw_landmarks_on_image(rgb_image, detection_result):
+  pose_landmarks_list = detection_result.pose_landmarks
+  annotated_image = np.copy(rgb_image)
+
+  # Detect the poses
+  for idx in range(len(pose_landmarks_list)):
+    pose_landmarks = pose_landmarks_list[idx]
+
